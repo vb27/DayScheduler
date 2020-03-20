@@ -88,28 +88,31 @@
 
 
   <script type="text/javascript">
-
+    // moment.js code to get the day of week, month and day
     $("#currentDay").text(moment().format('dddd, MMMM Do'))
 
-    
-    
-    
+    // function to change colors
     function colorChange(){
+      // gets the current time based off 24h hours
       var currentTime = moment().format("HH")
+      // loops through all of the textarea divs and then sets the data-time value to the timeSlot variable
       for (i=0; i<9; i++){
         var eachSlot = $("textarea")[i]
         var timeSlot = eachSlot.getAttribute("data-time")
        
-        
+        // if it isnt in the 9-5 range everything is grey
         if (currentTime < 9 || currentTime > 17) {
           $(eachSlot).addClass("bg-secondary")
         }
+        // if timeSlot is the same as the current time then change red
         else if (timeSlot == currentTime) {
           $(eachSlot).addClass("bg-danger")
         }
+        // if timeSlot is greater than the current time then change green
         else if (timeSlot > currentTime) {
           $(eachSlot).addClass("bg-success")
         }
+        // if timeSlot is lower than the current time then change grey
         else if (timeSlot < currentTime) {
           $(eachSlot).addClass("bg-secondary")
         }
@@ -117,11 +120,11 @@
 
     }
 
-
+    // saving the text to local storage
     function saveText() {
       var saveName = this.id
-      console.log(saveName)
       var saveText = ""
+      // depeding on the id of the button that was pressed it will save a certain text area
       if (saveName === "nine") {
         localStorage.setItem(saveName, $("#nineAM").val())
       } else if (saveName === "ten") {
@@ -145,6 +148,7 @@
       }
     }
     
+    // puts all the saved data to the correct time block text area
     function renderText() {
       $("#nineAM").text(localStorage.getItem("nine"))
       $("#tenAM").text(localStorage.getItem("ten"))
@@ -157,13 +161,16 @@
       $("#fivePM").text(localStorage.getItem("five"))
     }
 
+    // clears the local storage and then refreshs the page
     $("#clearButton").click(function(){
       localStorage.clear();
       location.reload();
     })
 
+    // calls the color change and renders the local storage on load up
     colorChange()
     renderText()
+    // whenever something with the class ".btn" is clicked then it runs the saveText function
     $(".btn").on("click", saveText)
 
 
