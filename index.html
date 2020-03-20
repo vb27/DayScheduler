@@ -83,6 +83,7 @@
       <button id="five" type="button" class="btn btn-primary col-1 fas fa-save"></button>
     </div>
 
+    <button id="clearButton" type="button" class="btn-warning">Clear History</button>
   </div>
 
 
@@ -94,7 +95,8 @@
     
     
     function colorChange(){
-      var currentTime = moment().format("HH")
+      // var currentTime = moment().format("HH")
+      var currentTime = 10
       for (i=0; i<9; i++){
         var eachSlot = $("textarea")[i]
         var timeSlot = eachSlot.getAttribute("data-time")
@@ -156,6 +158,10 @@
       $("#fivePM").text(localStorage.getItem("five"))
     }
 
+    $("#clearButton").click(function(){
+      localStorage.clear();
+      location.reload();
+    })
 
     colorChange()
     renderText()
