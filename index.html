@@ -31,55 +31,55 @@
         -third is a save button -->
     <div class="row">
       <div class="col-1 border-top border-bottom">9am</div>
-      <textarea id="nineAM" value="9"class="col-10 border "></textarea>
+      <textarea id="nineAM" data-time="9"class="col-10 border "></textarea>
       <button id="nine" type="button" class="btn btn-primary col-1 fas fa-save"></button>
     </div>
 
     <div class="row">
       <div class="col-1 border-top border-bottom">10am</div>
-      <textarea id="tenAM" value="10" class="col-10 border "></textarea>
+      <textarea id="tenAM" data-time="10" class="col-10 border "></textarea>
       <button id="ten" type="button" class="btn btn-primary col-1 fas fa-save"></button>
     </div>
 
     <div class="row">
       <div class="col-1 border-top border-bottom">11am</div>
-      <textarea id="elevenAM" value="11"class="col-10 border "></textarea>
+      <textarea id="elevenAM" data-time="11"class="col-10 border "></textarea>
       <button id="eleven" type="button" class="btn btn-primary col-1 fas fa-save"></button>
     </div>
 
     <div class="row">
       <div class="col-1 border-top border-bottom">12pm</div>
-      <textarea id="twelvePM" value="12" class="col-10 border "></textarea>
+      <textarea id="twelvePM" data-time="12" class="col-10 border "></textarea>
       <button id="twelve" type="button" class="btn btn-primary col-1 fas fa-save"></button>
     </div>
 
     <div class="row">
       <div class="col-1 border-top border-bottom">1pm</div>
-      <textarea id="onePM" value="1" class="col-10 border "></textarea>
+      <textarea id="onePM" data-time="13" class="col-10 border "></textarea>
       <button id="one" type="button" class="btn btn-primary col-1 fas fa-save"></button>
     </div>
 
     <div class="row">
       <div class="col-1 border-top border-bottom">2pm</div>
-      <textarea id="twoPM" value="2" class="col-10 border "></textarea>
+      <textarea id="twoPM" data-time="14" class="col-10 border "></textarea>
       <button id="two" type="button" class="btn btn-primary col-1 fas fa-save"></button>
     </div>
 
     <div class="row">
       <div class="col-1 border-top border-bottom">3pm</div>
-      <textarea id="threePM" value="3" class="col-10 border "></textarea>
+      <textarea id="threePM" data-time="15" class="col-10 border "></textarea>
       <button id="three" type="button" class="btn btn-primary col-1 fas fa-save"></button>
     </div>
 
     <div class="row">
       <div class="col-1 border-top border-bottom">4pm</div>
-      <textarea id="fourPM" value="4" class="col-10 border "></textarea>
+      <textarea id="fourPM" data-time="16" class="col-10 border "></textarea>
       <button id="four" type="button" class="btn btn-primary col-1 fas fa-save"></button>
     </div>
 
     <div class="row">
       <div class="col-1 border-top border-bottom">5pm</div>
-      <textarea id="fivePM" value="5" class="col-10 border "></textarea>
+      <textarea id="fivePM" data-time="17" class="col-10 border "></textarea>
       <button id="five" type="button" class="btn btn-primary col-1 fas fa-save"></button>
     </div>
 
@@ -90,11 +90,31 @@
 
     $("#currentDay").text(moment().format('dddd, MMMM Do'))
 
-    var currentTime = moment().format('LT')
-
     
+    
+    
+    function colorChange(){
+      var currentTime = moment().format("HH")
+      for (i=0; i<9; i++){
+        var eachSlot = $("textarea")[i]
+        var timeSlot = eachSlot.getAttribute("data-time")
+       
+        
+        if (currentTime < 9 || currentTime > 17) {
+          $(eachSlot).addClass("bg-secondary")
+        }
+        else if (timeSlot == currentTime) {
+          $(eachSlot).addClass("bg-danger")
+        }
+        else if (timeSlot > currentTime) {
+          $(eachSlot).addClass("bg-success")
+        }
+        else if (timeSlot < currentTime) {
+          $(eachSlot).addClass("bg-secondary")
+        }
+      }
 
-
+    }
 
 
     function saveText() {
@@ -137,7 +157,7 @@
     }
 
 
-
+    colorChange()
     renderText()
     $(".btn").on("click", saveText)
 
