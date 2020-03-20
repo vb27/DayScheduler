@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="style.css" />
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-
+  <script src="moment.min.js"></script>
   <title>Work Day Scheduler</title>
 </head>
 
@@ -31,55 +31,55 @@
         -third is a save button -->
     <div class="row">
       <div class="col-1 border-top border-bottom">9am</div>
-      <textarea id="nineAM" class="col-10 border "></textarea>
+      <textarea id="nineAM" value="9"class="col-10 border "></textarea>
       <button id="nine" type="button" class="btn btn-primary col-1 fas fa-save"></button>
     </div>
 
     <div class="row">
       <div class="col-1 border-top border-bottom">10am</div>
-      <textarea id="tenAM" class="col-10 border "></textarea>
+      <textarea id="tenAM" value="10" class="col-10 border "></textarea>
       <button id="ten" type="button" class="btn btn-primary col-1 fas fa-save"></button>
     </div>
 
     <div class="row">
       <div class="col-1 border-top border-bottom">11am</div>
-      <textarea id="elevenAM" class="col-10 border "></textarea>
+      <textarea id="elevenAM" value="11"class="col-10 border "></textarea>
       <button id="eleven" type="button" class="btn btn-primary col-1 fas fa-save"></button>
     </div>
 
     <div class="row">
       <div class="col-1 border-top border-bottom">12pm</div>
-      <textarea id="twelvePM" class="col-10 border "></textarea>
+      <textarea id="twelvePM" value="12" class="col-10 border "></textarea>
       <button id="twelve" type="button" class="btn btn-primary col-1 fas fa-save"></button>
     </div>
 
     <div class="row">
       <div class="col-1 border-top border-bottom">1pm</div>
-      <textarea id="onePM" class="col-10 border "></textarea>
+      <textarea id="onePM" value="1" class="col-10 border "></textarea>
       <button id="one" type="button" class="btn btn-primary col-1 fas fa-save"></button>
     </div>
 
     <div class="row">
       <div class="col-1 border-top border-bottom">2pm</div>
-      <textarea id="twoPM" class="col-10 border "></textarea>
+      <textarea id="twoPM" value="2" class="col-10 border "></textarea>
       <button id="two" type="button" class="btn btn-primary col-1 fas fa-save"></button>
     </div>
 
     <div class="row">
       <div class="col-1 border-top border-bottom">3pm</div>
-      <textarea id="threePM" class="col-10 border "></textarea>
+      <textarea id="threePM" value="3" class="col-10 border "></textarea>
       <button id="three" type="button" class="btn btn-primary col-1 fas fa-save"></button>
     </div>
 
     <div class="row">
       <div class="col-1 border-top border-bottom">4pm</div>
-      <textarea id="fourPM" class="col-10 border "></textarea>
+      <textarea id="fourPM" value="4" class="col-10 border "></textarea>
       <button id="four" type="button" class="btn btn-primary col-1 fas fa-save"></button>
     </div>
 
     <div class="row">
       <div class="col-1 border-top border-bottom">5pm</div>
-      <textarea id="fivePM" class="col-10 border "></textarea>
+      <textarea id="fivePM" value="5" class="col-10 border "></textarea>
       <button id="five" type="button" class="btn btn-primary col-1 fas fa-save"></button>
     </div>
 
@@ -88,11 +88,20 @@
 
   <script type="text/javascript">
 
+    $("#currentDay").text(moment().format('dddd, MMMM Do'))
+
+    var currentTime = moment().format('LT')
+
+    
+
+
+
+
     function saveText() {
       var saveName = this.id
       console.log(saveName)
       var saveText = ""
-      if (saveName === "nine"){
+      if (saveName === "nine") {
         localStorage.setItem(saveName, $("#nineAM").val())
       } else if (saveName === "ten") {
         localStorage.setItem(saveName, $("#tenAM").val())
@@ -113,11 +122,23 @@
       } else {
         return
       }
-
-
-      
+    }
+    
+    function renderText() {
+      $("#nineAM").text(localStorage.getItem("nine"))
+      $("#tenAM").text(localStorage.getItem("ten"))
+      $("#elevenAM").text(localStorage.getItem("eleven"))
+      $("#twelvePM").text(localStorage.getItem("twelve"))
+      $("#onePM").text(localStorage.getItem("one"))
+      $("#twoPM").text(localStorage.getItem("two"))
+      $("#threePM").text(localStorage.getItem("three"))
+      $("#fourPM").text(localStorage.getItem("four"))
+      $("#fivePM").text(localStorage.getItem("five"))
     }
 
+
+
+    renderText()
     $(".btn").on("click", saveText)
 
 
