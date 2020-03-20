@@ -98,23 +98,34 @@
       // loops through all of the textarea divs and then sets the data-time value to the timeSlot variable
       for (i=0; i<9; i++){
         var eachSlot = $("textarea")[i]
-        var timeSlot = eachSlot.getAttribute("data-time")
-       
+        var timeSlot = parseInt(eachSlot.getAttribute("data-time"))
+        
         // if it isnt in the 9-5 range everything is grey
         if (currentTime < 9 || currentTime > 17) {
           $(eachSlot).addClass("bg-secondary")
+          $(eachSlot).removeClass("bg-danger")
+          $(eachSlot).removeClass("bg-success")
         }
         // if timeSlot is the same as the current time then change red
         else if (timeSlot == currentTime) {
+          $(eachSlot).removeClass("bg-success")
+          $(eachSlot).removeClass("bg-secondary")
+
           $(eachSlot).addClass("bg-danger")
-        }
-        // if timeSlot is greater than the current time then change green
-        else if (timeSlot > currentTime) {
-          $(eachSlot).addClass("bg-success")
         }
         // if timeSlot is lower than the current time then change grey
         else if (timeSlot < currentTime) {
+          $(eachSlot).removeClass("bg-danger")
+          $(eachSlot).removeClass("bg-success")
+          
           $(eachSlot).addClass("bg-secondary")
+        }
+        // if timeSlot is greater than the current time then change green
+        else if (timeSlot > currentTime) {
+          $(eachSlot).removeClass("bg-secondary")
+          $(eachSlot).removeClass("bg-danger")
+
+          $(eachSlot).addClass("bg-success")
         }
       }
 
